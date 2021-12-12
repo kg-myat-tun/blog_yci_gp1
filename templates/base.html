@@ -1,0 +1,131 @@
+{% load static %}
+{% url 'index' as index %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="{% static 'articles/logo.png' %}">
+
+    <title> {% block title %}Evener{% endblock  %} </title>
+
+   
+    {% block head %}{% endblock  %}
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/app.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'events/main.css' %}"> {% endcomment %}
+</head>
+<body>
+    <div class="py-3 mb-5" id="themeHeaderSpacer"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom position-fixed top-0 w-100">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="{% url 'index' %}">
+                {% comment %} <img src="assets/images/cropped-logo.png" style="height: 40px" class="me-1" alt=""> {% endcomment %}
+                <i class="feather-book"></i>Blog
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="feather-align-right"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul id="menu-top-right-menu" class="navbar-nav ms-auto mb-2 mb-md-0 ">
+                    <li id="menu-item-12"
+                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home nav-item nav-item-12">
+                        <a href="{% url 'index' %}" class="nav-link {% if request.path == index %}active{% endif %}">Home</a>
+                    </li>
+                    <li id="menu-item-16"
+                        class="menu-item menu-item-type-post_type menu-item-object-page nav-item nav-item-16">
+                        <a href="#" class="nav-link ">About</a>
+                    </li>
+                  
+                    <li id="menu-item-11"
+                        class="menu-item menu-item-type-custom menu-item-object-custom nav-item nav-item-11">
+                        <a href="{% url 'contact' %}" class="nav-link ">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="row justify-content-center g-5">
+            <div class="col-12 col-lg-6">
+    
+                <div class="">
+                    {% block content %}{% endblock  %}
+                </div>
+    
+            </div>
+
+            <div class="col-12 col-lg-4 border-start" id="sidebarColumn">
+                <div class="position-sticky" style="top: 100px">
+                    <div class="mb-5 sidebar">
+    
+    
+                        <div id="search" class="mb-5">
+                            <form action="">
+                                <div class="d-flex search-box">
+                                    <input type="text" class="form-control flex-shrink-1 me-2 search-input" placeholder="Search Anything">
+                                    <button class="btn btn-primary search-btn">
+                                        <i class="feather-search d-block d-xl-none"></i>
+                                        <span class="d-none d-xl-block">Search</span>
+                                    </button>
+                                </div>
+    
+                            </form>
+    
+                        </div>
+    
+                        <div id="category">
+                            <h4 class="fw-bolder">Category Lists</h4>
+                            <ul class="list-group">
+                                {% for category in categories %}
+                                    {% url 'article_by_category' category.id as urlName %}
+
+                                    <li class="list-group-item">
+                                        <a href="{% url 'article_by_category' category.id %}" 
+                                            class="{% if request.path == urlName %}active{% endif %}"> {{ category.name }} </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="d-none d-lg-block">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-12 border-bottom mb-0 mt-3">
+            </div>
+            <div class="col-12">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center my-4 text-muted">
+                        <div class="text-center">
+                            Copyright © 2021 Blog
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="me-5 ">
+                                Developed by YCI GP-I
+                            </div>
+                            <a href="#themeHeaderSpacer" class="btn btn-primary">
+                                <i class="feather-arrow-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+   
+    {% block foot %}{% endblock  %}
+
+</body>
+</html>

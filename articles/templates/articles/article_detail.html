@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} Article Detail {% endblock title %}
+
+{% block content %}
+
+<div class="py-3">
+
+    <div class="small post-category mb-3">
+        <a href="{% url 'article_by_category' article.category_id.id %}" rel="category tag">
+            {{article.category_id}}
+        </a>
+    </div>
+
+    <h2 class="fw-bolder"> {{ article.title }} </h2>
+    <div class="my-3 feature-image-box">
+        {% comment %} <img width="1024" height="682" src="assets/images/de0d23dd-86f6-3ee1-a871-6325fb45bd06-1024x682.jpg"> {% endcomment %}
+    <div class="d-block d-md-flex justify-content-between align-items-center my-3">
+
+        <div class="">
+            {% comment %} <img alt="" src="assets/images/75d23af433e0cea4c0e45a56dba18b30.png"
+                 class="avatar avatar-30 photo rounded-circle" height="30" width="30" loading="lazy"> {% endcomment %}
+            <a href="#" title="Visit admin’s website"rel="author external">
+                <i class="feather-user"></i> 
+                {{ article.author }}
+            </a>
+        </div>
+
+        <div class="text-primary">
+            <i class="feather-calendar"></i>
+            {{ article.created_at|date:"F d , Y" }}
+        </div>
+    </div>
+
+    <p>{{ article.description|linebreaksbr }}</p>
+
+    <div class="nav d-flex justify-content-between py-3">
+        <a href="#"
+           class="btn btn-outline-primary page-mover rounded-circle">
+            <i class="feather-chevron-left"></i>
+        </a>
+
+        <a class="btn btn-outline-primary px-3 rounded-pill" href="{% url 'index' %}">
+            Read All
+        </a>
+
+        <a href="#"
+           class="btn btn-outline-primary page-mover rounded-circle">
+            <i class="feather-chevron-right"></i>
+        </a>
+    </div>
+</div>
+
+
+</div>
+
+<div class="d-block d-lg-none d-flex justify-content-center">
+</div>
+
+
+
+{% endblock content %}
