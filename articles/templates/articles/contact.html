@@ -1,4 +1,5 @@
 {% load static %}
+{% url 'contact' as contact %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +50,7 @@
                             <a href="#"class="text-black">About</a>
                         </li>
                         <li>
-                            <a href="{% url 'contact' %}"class="text-black">Contact</a>
+                            <a href="{% url 'contact' %}"class="text-black  {% if request.path == contact %}active{% endif %}">Contact</a>
                         </li>
                     </div>
                 </div>
